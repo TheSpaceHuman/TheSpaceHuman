@@ -1,68 +1,91 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        TheSpaceHuman
-      </h1>
-      <h2 class="subtitle">
-        My main app
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
-      </div>
+  <el-main class="main">
+    <div class="container">
+      <h1 class="page__h1">Dashboard</h1>
+      <el-row>
+        <el-col :sm="24" :md="12" :lg="8">
+          <h2 class="page__h2">Passwords</h2>
+          <el-timeline>
+            <el-timeline-item timestamp="2018/4/12" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/12 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/3" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/3 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/2" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/2 20:46</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+        <el-col :sm="24" :md="12" :lg="8">
+          <h2 class="page__h2">Blog</h2>
+          <el-timeline>
+            <el-timeline-item timestamp="2018/4/12" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/12 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/3" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/3 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/2" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/2 20:46</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+        <el-col :sm="24" :md="12" :lg="8">
+          <h2 class="page__h2">TodoList</h2>
+          <el-timeline>
+            <el-timeline-item timestamp="2018/4/12" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/12 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/3" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/3 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2018/4/2" placement="top">
+              <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/2 20:46</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+      </el-row>
+
     </div>
-  </section>
+  </el-main>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 
 export default {
-  components: {
-    Logo
-  }
+  name: 'Dashboard',
+  components: {}
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>

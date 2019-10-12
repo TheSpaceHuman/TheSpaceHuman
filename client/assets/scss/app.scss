@@ -1,0 +1,62 @@
+@import "utils/helper";
+@import "utils/fonts";
+
+html, body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.3;
+  font-size: 18px;
+  margin: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: #409EFF;
+}
+.header {
+  padding: 0;
+
+  &__logo {
+    margin-right: auto!important;
+  }
+  &__main-menu {
+
+  }
+  &__main-menu__list {
+    display: flex;
+  }
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.footer {
+  margin-top: auto;
+  &__authors {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+  }
+}
+.main {
+  min-height: 80vh;
+}
+.container {
+
+}
+.page__h1 {
+  text-align: center;
+  margin-bottom: 45px;
+}
+.password-item-wrapper {
+  padding: 15px;
+}
+.wiki-item-wrapper {
+  padding: 12px;
+}
+.login-form .form-control, .register-form .form-control {
+  width: auto;
+}

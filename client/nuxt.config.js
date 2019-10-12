@@ -2,7 +2,7 @@ const pkg = require('./package')
 
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Headers of the page
@@ -45,12 +45,36 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/auth',
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://thespacehuman.web/api'
+  },
+
+  /*
+  ** Auth configuration
+  */
+  auth: {
+    redirect: {
+      login: '/auth/login',
+      callback: '/auth/login',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
+          logout: { url: '/auth/logout', method: 'post'},
+          user: { url: '/auth/me', method: 'get', propertyName: 'user' }
+        },
+        tokenRequired: true,
+        tokenType: 'bearer'
+      }
+    }
   },
 
   /*
