@@ -1,37 +1,14 @@
 <template>
   <div class="json-fields">
     <div class="json-fields__items">
-      <div class="json-fields__item"
-        v-for="(item,i) in fields"
-        :key="i"
-        >
-        <label class="json-fields__item__label">
-          {{ pattern.label }}
-          <el-input
-            :label="pattern.label"
-            class="json-fields__item__label__label-control"
-            v-model="item.label"
-          ></el-input>
-        </label>
-        <label class="json-fields__item__label">
-          {{ pattern.value }}
-          <el-input
-            :label="pattern.value"
-            class="json-fields__item__label__value-control"
-            v-model="item.value"
-          ></el-input>
-        </label>
-
-        <el-button
-          v-if="visibilityDestroyAction"
-          type="danger"
-          icon="el-icon-delete"
-          circle
-          class="json-fields__item__delete"
-          @click="deleteField(i)"
-        ></el-button>
+        <JsonField
+          v-for="(item,i) in fields"
+          :key="i"
+          :field="item"
+          :visibilityDestroyAction="visibilityDestroyAction"
+          :index="i"
+        ></JsonField>
       </div>
-    </div>
     <div class="json-fields__action">
       <el-button
         type="success"
@@ -39,34 +16,24 @@
         @click="addField"
       >{{ addButtonName }}</el-button>
     </div>
-
   </div>
 </template>
 
 <script>
+  import JsonField from '@/components/Passwords/JsonField.vue'
   export default {
     name: 'JsonFields',
+    components: {
+      JsonField
+    },
     props: {
-      pattern: {
-        type: Object,
-        default: function () {
-          return {
-            label: 'Название параметра',
-            value: 'Значение'
-          }
-        }
-      },
       addButtonName: {
         default: 'Добавить поле'
       }
     },
     data() {
       return {
-        fields: [],
-        mock: {
-          label: '',
-          value: ''
-        }
+        fields: this.$store.getters.getJsonFields,
       }
     },
     computed: {
@@ -79,24 +46,14 @@
     },
     methods: {
       addField() {
-        this.fields.push(this.mock)
-        this.$emit('fields', this.fields)
-      },
-      deleteField(id) {
-        this.fields.splice(id, 1)
-        this.$emit('fields', this.fields)
+        this.$store.commit('addJsonFields', {label: '', value: ''})
       }
-    },
-    mounted() {
-      this.fields.push(this.mock)
-      this.$emit('fields', this.fields)
     }
   }
 </script>
 
 <style lang="scss">
 .json-fields {
-
   &__item {
     display: flex;
     justify-content: flex-start;

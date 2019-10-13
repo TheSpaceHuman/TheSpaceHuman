@@ -28,3 +28,4 @@ Route::group([
 });
 
 Route::post('password/store', 'PasswordController@store');
+Route::get('password', 'PasswordController@index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PasswordResource;
 use App\Password;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class PasswordController extends Controller
      */
     public function index()
     {
-        //
+      $passwords = Password::orderBy('created_at', 'DESC')->where('user_id', auth()->user()->id)->get();
+
+      return PasswordResource::collection($passwords);
     }
 
     /**
@@ -35,11 +38,15 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
+        $fields = json_encode($request->fields) ;
+
         Password::create([
             'title' => $request->title,
-            'fields' => $request->fields,
+            'fields' => $fields,
             'user_id' => auth()->user()->id
         ]);
+
+      return response()->json(['message' => 'Новый пароль успешно добавлен']);
     }
 
     /**

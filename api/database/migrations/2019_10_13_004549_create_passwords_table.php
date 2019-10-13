@@ -17,7 +17,7 @@ class CreatePasswordsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->integer('user_id');
-            $table->longText('fields');
+            $table->json('fields');
             $table->timestamps();
         });
     }

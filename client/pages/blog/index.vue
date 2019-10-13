@@ -31,6 +31,7 @@
 
   export default {
     name: 'Blog',
+    middleware: 'auth',
     components: {},
     data() {
       return {

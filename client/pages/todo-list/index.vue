@@ -21,6 +21,7 @@
 
   export default {
     name: 'TodoList',
+    middleware: 'auth',
     components: {},
     data() {
       return {

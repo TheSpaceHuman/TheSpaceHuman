@@ -12,8 +12,8 @@
       :visible.sync="dialogVisible"
      >
       <form>
-        <el-input v-model="passwordForm.title" placeholder="Название пароля" class="form-control"></el-input>
-        <JsonFields @fields="updateFields"></JsonFields>
+        <el-input v-model="title" placeholder="Название пароля" class="form-control"></el-input>
+        <JsonFields></JsonFields>
         <el-button type="primary" @click="submitForm">Создать</el-button>
       </form>
     </el-dialog>
@@ -30,29 +30,27 @@
     data() {
       return {
         dialogVisible: false,
-        passwordForm: {
-          title: '',
-          fields: [],
-        }
+        title: ''
       }
     },
     methods: {
-      updateFields(data) {
-        this.passwordForm.fields = data
-      },
       async submitForm() {
         try {
           const res = await this.$axios({
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
             method: 'post',
             url: 'password/store',
-            data: this.passwordForm
+            data: {
+              title: this.title,
+              fields: this.fields
+            }
           })
           this.$message({
             showClose: true,
             message: res.data.message,
             type: 'success'
           })
+          this.dialogVisible = false
 
         } catch (e) {
           this.$message({
@@ -61,9 +59,20 @@
             type: 'error'
           })
           console.log(e)
+          this.dialogVisible = false
         }
-        }
+        this.$store.dispatch('loadingPasswords');
+        this.$store.commit('clearJsonFields');
+       }
+
+
+      },
+    computed: {
+      fields() {
+        return this.$store.getters.getJsonFields
       }
+    }
+
 
   }
 </script>

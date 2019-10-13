@@ -21,24 +21,23 @@
         </el-col>
       </el-row>
 
-      <el-row>
+      <el-row type="flex" style="flex-wrap: wrap;" v-loading="this.$store.getters.getLoading">
         <el-col
-          :sm="24"
-          :md="12"
-          :lg="8"
-          v-for="(card, i) in showPassword"
+          :sm="{span:24}"
+          :md="{span:12}"
+          :lg="{span:8}"
+          v-for="(password, i) in passwordInSearch"
           :key="i"
           class="password-item-wrapper"
         >
           <el-card class="password-item">
             <div class="password-item__title">
-              Title - {{ card.title }}
+              {{ password.title }}
             </div>
-            <div class="password-item__name">
-              Login - {{ card.name }}
-            </div>
-            <div class="password-item__password">
-              Password - {{ card.password }}
+            <div class="password-item__fields">
+              <p v-for="field in JSON.parse(password.fields)">
+                <b>{{ field.label }}:</b> {{ field.value }}
+              </p>
             </div>
           </el-card>
         </el-col>
@@ -51,60 +50,32 @@
   import CreatePassword from '@/components/Passwords/CreatePassword.vue'
   export default {
     name: 'Passwords',
+    middleware: 'auth',
     components: {
       CreatePassword
     },
     data() {
       return {
-        autocompleteList: [],
         passwordSearchForm: {
           search: ''
         },
-        passwords: [
-          { title: 'Adsad', name: 'Name1', password: '12345'},
-          { title: 'Bcxvz', name: 'Name2', password: '12345'},
-          { title: 'Cgf4dsg', name: 'Name3', password: '12345'},
-          { title: 'Ds23ad', name: 'Name4', password: '12345'},
-          { title: 'Fcxz', name: 'Name5', password: '12345'},
-          { title: 'Gqwet2423', name: 'Name6', password: '12345'},
-        ]
       }
-    },
-    methods: {
-      querySearch(queryString, cb) {
-        let autocompleteList = this.autocompleteList;
-        let results = queryString ? autocompleteList.filter(this.createFilter(queryString)) : autocompleteList;
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (link) => {
-          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      passwordsData() {
-        let acData = [];
-        this.passwords.forEach(el => {
-          acData.push({"value": el.title})
-        });
-        return acData
-      }
-
     },
     computed: {
-      showPassword() {
+      passwordInSearch() {
         let result = [];
         if(this.passwordSearchForm.search === '') {
-          result = this.passwords
+          result = this.$store.getters.getPasswords
         } else {
-          result = this.passwords.filter(element => {
+          result = this.$store.getters.getPasswords.filter(element => {
             return element.title.toLowerCase().match(this.passwordSearchForm.search.toLowerCase())
           })
         }
         return result
       },
     },
-    mounted() {
-      this.autocompleteList = this.passwordsData();
+    created() {
+      this.$store.dispatch('loadingPasswords');
     }
   }
 </script>
@@ -114,6 +85,19 @@
     padding: 0 16px 20px;
     &__input {
       width: 100%;
+    }
+  }
+  .password-item {
+    &__title {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    &__fields {
+      p {
+        display: block;
+        margin-bottom: 7px;
+        margin-top: 0;
+      }
     }
   }
 </style>
