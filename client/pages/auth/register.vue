@@ -43,7 +43,7 @@
     methods: {
       async register () {
         try {
-          let res = await this.$axios({
+          const res = await this.$axios({
               headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
               method: 'post',
               url: '/auth/registration',

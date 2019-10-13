@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Password;
 use Illuminate\Http\Request;
 
 class PasswordController extends Controller
@@ -32,9 +33,13 @@ class PasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $data)
+    public function store(Request $request)
     {
-        dd($data);
+        Password::create([
+            'title' => $request->title,
+            'fields' => $request->fields,
+            'user_id' => auth()->user()->id
+        ]);
     }
 
     /**

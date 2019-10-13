@@ -2,6 +2,9 @@
   <el-main class="main">
     <div class="container">
       <h1 class="page__h1">Passwords</h1>
+
+      <CreatePassword></CreatePassword>
+
       <el-row>
         <el-col :sm="24">
           <el-form class="search-from">
@@ -45,9 +48,12 @@
 </template>
 
 <script>
-
+  import CreatePassword from '@/components/Passwords/CreatePassword.vue'
   export default {
     name: 'Passwords',
+    components: {
+      CreatePassword
+    },
     data() {
       return {
         autocompleteList: [],
