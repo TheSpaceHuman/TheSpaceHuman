@@ -65,8 +65,7 @@
     computed: {
       cLabel: {
         get() {
-          console.log(this.index)
-          return this.$store.getters.getJsonFields[this.index].label
+          return this.$store.getters.getJsonFields[this.index] && this.$store.getters.getJsonFields[this.index].label || ''
         },
         set(value) {
           this.$store.commit('updateJsonField', { index: this.index, value: {label:value}})
@@ -74,8 +73,7 @@
       },
       cValue: {
         get() {
-          console.log(this.index)
-          return this.$store.getters.getJsonFields[this.index].value
+          return this.$store.getters.getJsonFields[this.index] && this.$store.getters.getJsonFields[this.index].value || ''
         },
         set(value) {
           this.$store.commit('updateJsonField', { index: this.index, value: {value}})

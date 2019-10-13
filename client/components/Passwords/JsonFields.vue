@@ -32,9 +32,7 @@
       }
     },
     data() {
-      return {
-        fields: this.$store.getters.getJsonFields,
-      }
+      return {}
     },
     computed: {
       visibilityDestroyAction() {
@@ -42,6 +40,9 @@
           return true
         }
         return false
+      },
+      fields() {
+        return this.$store.getters.getJsonFields
       }
     },
     methods: {
