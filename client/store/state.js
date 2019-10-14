@@ -3,5 +3,8 @@ export default () => ({
   posts: [],
   tasks: [],
   jsonFields: [{label: '', value: ''}],
-  loading: true
+  loading: true,
+  passwordsChangeLog : [],
+  postsChangeLog : [],
+  tasksChangeLog : []
 })

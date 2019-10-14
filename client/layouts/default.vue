@@ -17,6 +17,16 @@
   export default {
     components: {
       MainMenu
+    },
+    data() {
+      return {
+        kek: ''
+      }
+    },
+    watch: {
+      $route() {
+        this.$store.commit('setLoading', true)
+      }
     }
   }
 </script>

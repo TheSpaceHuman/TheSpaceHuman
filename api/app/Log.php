@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Password extends Model
+class Log extends Model
 {
     protected $guarded = ['id'];
 
-    public function log()
+    public function loggable()
     {
-      return $this->morphMany('App\Log', 'loggable');
+      return $this->morphTo();
     }
 }

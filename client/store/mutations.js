@@ -12,6 +12,10 @@ export default {
   setLoading(state, payload) {
     state.loading = payload
   },
+  setPasswordsChangeLog(state, payload) {
+    state.passwordsChangeLog = payload
+  },
+
 
   // JsonFields
   addJsonFields(state, obj) {

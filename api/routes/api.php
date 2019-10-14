@@ -27,7 +27,11 @@ Route::group([
   Route::get('me', 'AuthController@me');
 });
 
+// Password
 Route::post('password/store', 'PasswordController@store');
 Route::get('password', 'PasswordController@index');
 Route::put('password/update/{id}', 'PasswordController@update');
 Route::delete('password/delete/{id}', 'PasswordController@destroy');
+
+// Log
+Route::get('log', 'LogController@index');

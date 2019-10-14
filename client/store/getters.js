@@ -14,4 +14,7 @@ export default {
   getJsonFields: state => {
     return state.jsonFields
   },
+  getPasswordsChangeLog: state => {
+    return state.passwordsChangeLog
+  }
 }

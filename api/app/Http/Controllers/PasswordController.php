@@ -40,11 +40,17 @@ class PasswordController extends Controller
     {
         $fields = json_encode($request->fields) ;
 
-        Password::create([
+       $password = Password::create([
             'title' => $request->title,
             'fields' => $fields,
             'user_id' => auth()->user()->id
         ]);
+
+      $password->log()->create([
+          'message' => 'Создан новый пароль: ' . $password->title,
+          'type' => 'create',
+          'user_id' => auth()->user()->id
+      ]);
 
       return response()->json(['message' => 'Новый пароль успешно добавлен']);
     }
@@ -87,6 +93,13 @@ class PasswordController extends Controller
             'title' => $request->input('title'),
             'fields' => $fields
           ]);
+
+          $password->log()->create([
+              'message' => 'Изменен пароль: ' . $password->title,
+              'type' => 'update',
+              'user_id' => auth()->user()->id
+          ]);
+
           return response()->json([
               'password' => $updatedPassword,
               'message' => [
@@ -115,6 +128,13 @@ class PasswordController extends Controller
 
       if($password->user_id === auth()->user()->id) {
         $password->delete();
+
+        $password->log()->create([
+            'message' => 'Удалён пароль: ' . $password->title,
+            'type' => 'delete',
+            'user_id' => auth()->user()->id
+        ]);
+
         return response()->json([
             'message' => [
                 'type' => 'success',

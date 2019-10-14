@@ -87,7 +87,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadingPasswords');
+      this.$store.dispatch('loadingPasswordsChangeLog');
     }
   }
 </script>
@@ -120,6 +120,7 @@
     &__title {
       font-weight: 700;
       margin-bottom: 20px;
+      font-size: 27px;
     }
     &__fields {
       p {
