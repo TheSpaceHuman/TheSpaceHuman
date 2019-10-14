@@ -87,7 +87,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadingPasswordsChangeLog');
+      this.$store.dispatch('loadingPasswords');
     }
   }
 </script>

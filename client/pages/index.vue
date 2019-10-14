@@ -6,7 +6,7 @@
         <el-col :sm="24" :md="12" :lg="8" v-loading="this.$store.getters.getLoading">
           <h2 class="page__h2">Passwords</h2>
           <el-timeline v-for="passwordLog in this.$store.getters.getPasswordsChangeLog">
-            <el-timeline-item :timestamp="passwordLog['created_at']" placement="top">
+            <el-timeline-item :timestamp="passwordLog['updated_at']" placement="top">
               <el-card>
                 <h4>{{ passwordLog.type}}</h4>
                 <p>{{ passwordLog.message}}</p>
