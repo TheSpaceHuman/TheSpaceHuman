@@ -1,5 +1,6 @@
 export default {
   loadingPasswords(context) {
+    context.commit('setLoading', true)
     this.$axios.get(`password`)
     .then((res) => {
       context.commit('setPasswords', res.data.data);
@@ -9,5 +10,6 @@ export default {
       console.log(e)
     })
   },
+
 
 }

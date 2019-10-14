@@ -15,7 +15,7 @@ class PasswordController extends Controller
      */
     public function index()
     {
-      $passwords = Password::orderBy('created_at', 'DESC')->where('user_id', auth()->user()->id)->get();
+      $passwords = Password::orderBy('updated_at', 'DESC')->where('user_id', auth()->user()->id)->get();
 
       return PasswordResource::collection($passwords);
     }
@@ -80,7 +80,27 @@ class PasswordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $password = Password::find($id);
+        if($password->user_id === auth()->user()->id) {
+          $fields = json_encode($request->input('fields')) ;
+          $updatedPassword = $password->update([
+            'title' => $request->input('title'),
+            'fields' => $fields
+          ]);
+          return response()->json([
+              'password' => $updatedPassword,
+              'message' => [
+                  'type' => 'success',
+                  'body' => 'Пароль успешно обновлен'
+              ]
+          ]);
+        } else {
+          return response()->json(['message' => [
+              'type' => 'warning',
+              'body' => 'Данный пароль не ваш!'
+            ]
+          ]);
+        }
     }
 
     /**
@@ -91,6 +111,22 @@ class PasswordController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $password = Password::find($id);
+
+      if($password->user_id === auth()->user()->id) {
+        $password->delete();
+        return response()->json([
+            'message' => [
+                'type' => 'success',
+                'body' => 'Пароль успешно удалён!'
+            ]
+        ]);
+      } else {
+        return response()->json(['message' => [
+            'type' => 'warning',
+            'body' => 'Данный пароль не ваш!'
+          ]
+        ]);
+      }
     }
 }

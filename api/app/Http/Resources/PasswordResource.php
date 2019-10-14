@@ -18,8 +18,8 @@ class PasswordResource extends JsonResource
           'id' => $this->id,
           'title' => $this->title,
           'fields' => $this->fields,
-          'created_at' => date('d-m-Y', strtotime($this->created_at)),
-          'updated_at' => date('d-m-Y', strtotime($this->updated_at)),
+          'created_at' => date('d-m-Y h:m', strtotime($this->created_at)),
+          'updated_at' => date('d-m-Y h:m', strtotime($this->updated_at)),
       ];
     }
 }

@@ -31,6 +31,16 @@
           class="password-item-wrapper"
         >
           <el-card class="password-item">
+            <div class="password-item__top-line">
+              <div class="password-item__top-line__date">
+                {{ password['updated_at'] }}
+              </div>
+              <div class="password-item__top-line__actions">
+                <UpdatePassword :password-id="password.id"></UpdatePassword>
+                <DeletePassword :password-id="password.id"></DeletePassword>
+              </div>
+            </div>
+
             <div class="password-item__title">
               {{ password.title }}
             </div>
@@ -47,12 +57,14 @@
 </template>
 
 <script>
+  import UpdatePassword from '@/components/Passwords/UpdatePassword.vue'
   import CreatePassword from '@/components/Passwords/CreatePassword.vue'
+  import DeletePassword from '@/components/Passwords/DeletePassword.vue'
   export default {
     name: 'Passwords',
     middleware: 'auth',
     components: {
-      CreatePassword
+      CreatePassword, UpdatePassword, DeletePassword
     },
     data() {
       return {
@@ -88,6 +100,23 @@
     }
   }
   .password-item {
+    &__top-line {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      &__actions {
+        display: flex;
+      }
+      &__actions > div {
+        padding-left: 10px;
+      }
+
+      &__date {
+        font-size: 14px;
+        color: rgba(0,0,0, .7);
+      }
+    }
     &__title {
       font-weight: 700;
       margin-bottom: 20px;
