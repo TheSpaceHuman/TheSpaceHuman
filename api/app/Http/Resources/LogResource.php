@@ -21,8 +21,8 @@ class LogResource extends JsonResource
           'user_id' => $this->user_id,
           'loggable_id' => $this->loggable_id,
           'loggable_type' => $this->loggable_type,
-          'created_at' => date('d-m-Y h:m', strtotime($this->created_at)),
-          'updated_at' => date('d-m-Y h:m', strtotime($this->updated_at)),
+          'created_at' => date('d/m/Y h:m', strtotime($this->created_at)),
+          'updated_at' => date('d/m/Y h:m', strtotime($this->updated_at)),
       ];
     }
 }

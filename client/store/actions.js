@@ -12,7 +12,7 @@ export default {
   },
   loadingPasswordsChangeLog(context) {
     context.commit('setLoading', true)
-    this.$axios.get(`log`)
+    this.$axios.get(`log/passwords`)
     .then((res) => {
       context.commit('setPasswordsChangeLog', res.data.data);
       context.commit('setLoading', false)

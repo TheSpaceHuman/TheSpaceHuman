@@ -16,7 +16,6 @@
               <h4 class="blog__card__title"></h4>
               <p class="blog__card__subtitle"></p>
               <div class="blog__card__actions">
-                <el-button>Подробно</el-button>
               </div>
             </el-card>
           </el-col>

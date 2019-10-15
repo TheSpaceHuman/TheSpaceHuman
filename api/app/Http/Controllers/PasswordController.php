@@ -38,7 +38,12 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
-        $fields = json_encode($request->fields) ;
+      $request->validate([
+          'title' => 'required|string|max:255',
+          'fields' => 'required'
+      ]);
+
+      $fields = json_encode($request->fields) ;
 
        $password = Password::create([
             'title' => $request->title,
@@ -52,7 +57,11 @@ class PasswordController extends Controller
           'user_id' => auth()->user()->id
       ]);
 
-      return response()->json(['message' => 'Новый пароль успешно добавлен']);
+      return response()->json(['message' => [
+              'type' => 'success',
+              'body' => 'Новый пароль успешно добавлен'
+          ]
+      ]);
     }
 
     /**

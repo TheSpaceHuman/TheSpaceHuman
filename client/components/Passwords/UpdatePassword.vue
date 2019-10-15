@@ -1,6 +1,6 @@
 <template>
-  <div class="create-password">
-    <div class="create-password__action">
+  <div class="update-password">
+    <div class="update-password__action">
       <el-button
         type="warning"
         icon="el-icon-edit"
@@ -12,16 +12,17 @@
       title="Обновить пароль"
       :visible.sync="dialogVisible"
      >
-      <form>
+      <form @submit.prevent="validate">
         <el-input v-model="title" placeholder="Название пароля" class="form-control"></el-input>
         <JsonFields></JsonFields>
-        <el-button type="warning" @click="submitForm">Обновить</el-button>
+        <el-button type="warning" native-type="submit">Обновить</el-button>
       </form>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import { required } from 'vuelidate/lib/validators'
   import JsonFields from '@/components/Passwords/JsonFields.vue'
   export default {
     name: 'UpdatePassword',
@@ -76,8 +77,18 @@
         this.title = this.password.title
 
         this.dialogVisible = true
+      },
+      validate() {
+        if(this.$v.title.required && this.$v.title.required) {
+          this.submitForm()
+        } else {
+          this.$message({
+            showClose: true,
+            message: 'Вы не заполнили форму!',
+            type: 'warning'
+          })
+        }
       }
-
       },
     computed: {
       password() {
@@ -88,13 +99,21 @@
       fields() {
         return this.$store.getters.getJsonFields
       }
+    },
+    validations: {
+      title: {
+        required
+      },
+      fields: {
+        required
+      }
     }
 
   }
 </script>
 
 <style lang="scss">
-.create-password {
+.update-password {
   &__action {
     display: flex;
     align-items: center;

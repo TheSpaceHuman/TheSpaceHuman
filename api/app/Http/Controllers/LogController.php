@@ -3,88 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LogResource;
-use App\Http\Resources\PasswordResource;
 use App\Log;
-use App\Password;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function passwords()
     {
-      $passwordsLog = Log::orderBy('updated_at', 'DESC')->where('user_id', auth()->user()->id)->get();
+      $passwords = Log::orderBy('updated_at', 'DESC')
+          ->where('user_id', auth()->user()->id)
+          ->where('loggable_type', 'App\Password')
+          ->limit(10)
+          ->get();
 
-      return LogResource::collection($passwordsLog);
+      return LogResource::collection($passwords);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Log $log)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Log $log)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Log $log)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Log $log)
-    {
-        //
-    }
 }

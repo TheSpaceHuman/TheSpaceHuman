@@ -11,16 +11,17 @@
       title="Создать новый пароль"
       :visible.sync="dialogVisible"
      >
-      <form>
-        <el-input v-model="title" placeholder="Название пароля" class="form-control"></el-input>
-        <JsonFields></JsonFields>
-        <el-button type="primary" @click="submitForm">Создать</el-button>
-      </form>
+        <form @submit.prevent="validate">
+          <el-input v-model="title" placeholder="Название пароля" class="form-control"></el-input>
+          <JsonFields></JsonFields>
+          <el-button type="primary" native-type="submit">Создать</el-button>
+        </form>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import { required } from 'vuelidate/lib/validators'
   import JsonFields from '@/components/Passwords/JsonFields.vue'
   export default {
     name: 'CreatePassword',
@@ -47,9 +48,10 @@
           })
           this.$message({
             showClose: true,
-            message: res.data.message,
-            type: 'success'
+            message: res.data.message.body,
+            type: res.data.message.type
           })
+          console.info(res)
           this.dialogVisible = false
 
         } catch (e) {
@@ -63,16 +65,33 @@
         }
         this.$store.dispatch('loadingPasswords');
         this.$store.commit('clearJsonFields');
-       }
-
+       },
+      validate() {
+        if(this.$v.title.required && this.$v.title.required) {
+          this.submitForm()
+        } else {
+          this.$message({
+            showClose: true,
+            message: 'Вы не заполнили форму!',
+            type: 'warning'
+          })
+        }
+      }
 
       },
     computed: {
       fields() {
         return this.$store.getters.getJsonFields
       }
+    },
+    validations: {
+      title: {
+        required
+      },
+      fields: {
+        required
+      }
     }
-
 
   }
 </script>

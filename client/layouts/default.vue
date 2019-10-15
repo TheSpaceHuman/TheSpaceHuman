@@ -17,8 +17,6 @@
   export default {
     components: {
       MainMenu
-    },
-    data() {
     }
   }
 </script>

@@ -5,8 +5,18 @@
         type="danger"
         icon="el-icon-delete"
         circle
-        @click="submitForm"
+        @click="dialogVisible = true"
       ></el-button>
+      <el-dialog
+        title="Удаление пароля"
+        :visible.sync="dialogVisible"
+        >
+        <span>Вы точно хотите удалить данный пароль?</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">Нет</el-button>
+          <el-button type="primary" @click="submitForm">Да</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -21,10 +31,14 @@
       }
     },
     data() {
-      return {}
+      return {
+        dialogVisible: false,
+
+      }
     },
     methods: {
       async submitForm() {
+        this.dialogVisible = false
         try {
           const res = await this.$axios({
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -45,7 +59,11 @@
           console.log(e)
         }
         this.$store.dispatch('loadingPasswords');
-       }
+       },
+      alert() {
+
+      }
+
     }
 
   }
