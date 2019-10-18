@@ -38,18 +38,19 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
+
       $request->validate([
           'title' => 'required|string|max:255',
-          'fields' => 'required'
+          'fields' => 'required',
       ]);
 
       $fields = json_encode($request->fields) ;
 
-       $password = Password::create([
-            'title' => $request->title,
-            'fields' => $fields,
-            'user_id' => auth()->user()->id
-        ]);
+      $password = Password::create([
+          'title' => $request->title,
+          'fields' => $fields,
+          'user_id' => auth()->user()->id
+      ]);
 
       $password->log()->create([
           'message' => 'Создан новый пароль: ' . $password->title,
@@ -58,9 +59,9 @@ class PasswordController extends Controller
       ]);
 
       return response()->json(['message' => [
-              'type' => 'success',
-              'body' => 'Новый пароль успешно добавлен'
-          ]
+          'type' => 'success',
+          'body' => 'Новый пароль успешно добавлен'
+      ]
       ]);
     }
 

@@ -35,30 +35,7 @@
     data() {
       return {
         wikiCategories: [
-          {
-            title: 'Category 1',
-            content: '<ul>\n' +
-              '  <li><a href="#">Link1</a></li>\n' +
-              '  <li><a href="#">Link2</a></li>\n' +
-              '  <li><a href="#">Link3</a></li>\n' +
-              '</ul>'
-          },
-          {
-            title: 'Category 2',
-            content: '<ul>\n' +
-              '  <li><a href="#">Link1</a></li>\n' +
-              '  <li><a href="#">Link2</a></li>\n' +
-              '  <li><a href="#">Link3</a></li>\n' +
-              '</ul>'
-          },
-          {
-            title: 'Category 3',
-            content: '<ul>\n' +
-              '  <li><a href="#">Link1</a></li>\n' +
-              '  <li><a href="#">Link2</a></li>\n' +
-              '  <li><a href="#">Link3</a></li>\n' +
-              '</ul>'
-          },
+
         ]
       }
     }
