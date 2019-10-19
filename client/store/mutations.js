@@ -4,7 +4,7 @@ export default {
     state.passwords = payload
   },
   setPosts(state, payload) {
-    state.blogs = payload
+    state.posts = payload
   },
   setTasks(state, payload) {
     state.tasks = payload

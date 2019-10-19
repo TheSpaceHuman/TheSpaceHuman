@@ -15,9 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('updated_at', 'DESC')->where('user_id', auth()->user()->id)->get();
+        $posts = Post::orderBy('updated_at', 'DESC')->where('user_id', auth()->user()->id)->paginate(12);
 
-        PostResource::collection($posts);
+        return PostResource::collection($posts);
     }
 
     /**

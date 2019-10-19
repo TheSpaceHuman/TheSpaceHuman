@@ -37,6 +37,7 @@ module.exports = {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/vuelidate',
+    '@/plugins/vue2filters',
   ],
 
   /*

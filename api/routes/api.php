@@ -33,5 +33,19 @@ Route::get('password', 'PasswordController@index');
 Route::put('password/update/{id}', 'PasswordController@update');
 Route::delete('password/delete/{id}', 'PasswordController@destroy');
 
+// Posts
+Route::post('post/store', 'PostController@store');
+Route::get('post', 'PostController@index');
+Route::put('post/update/{id}', 'PostController@update');
+Route::delete('post/delete/{id}', 'PostController@destroy');
+
+// Tasks
+Route::post('task/store', 'TaskController@store');
+Route::get('task', 'TaskController@index');
+Route::put('task/update/{id}', 'TaskController@update');
+Route::delete('task/delete/{id}', 'TaskController@destroy');
+
 // Log
 Route::get('log/passwords', 'LogController@passwords');
+Route::get('log/posts', 'LogController@posts');
+Route::get('log/tasks', 'LogController@tasks');

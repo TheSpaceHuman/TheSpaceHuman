@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,8 @@ class PostResource extends JsonResource
     {
       return [
           'id' => $this->id,
-          'title' => $this->title,
           'body' => $this->body,
-          'image' => $this->image,
-          'tags' => $this->tags,
+          'end' => $this->end,
           'created_at' => date('d-m-Y', strtotime($this->created_at)),
           'updated_at' => date('d-m-Y', strtotime($this->updated_at)),
       ];

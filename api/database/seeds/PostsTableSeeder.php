@@ -20,6 +20,7 @@ class PostsTableSeeder extends Seeder
             'body' => $faker->text(400),
             'user_id' => 1,
             'tags' => 'test',
+            'image' => $faker->imageUrl(800, 600, 'technics')
         ]);
       }
     }

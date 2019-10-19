@@ -21,6 +21,29 @@ export default {
       console.log(e)
     })
   },
+  loadingPosts(context) {
+    context.commit('setLoading', true)
+    this.$axios.get(`post`)
+    .then((res) => {
+      context.commit('setPosts', res.data.data);
+      context.commit('setLoading', false)
+      console.log(res.data)
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+  },
+  loadingTasks(context) {
+    context.commit('setLoading', true)
+    this.$axios.get(`task`)
+    .then((res) => {
+      context.commit('setTasks', res.data.data);
+      context.commit('setLoading', false)
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+  },
 
 
 }

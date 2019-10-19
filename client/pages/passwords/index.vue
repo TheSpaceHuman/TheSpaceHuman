@@ -21,7 +21,7 @@
         </el-col>
       </el-row>
 
-      <el-row type="flex" style="flex-wrap: wrap;" v-loading="this.$store.getters.getLoading">
+      <el-row type="flex" style="flex-wrap: wrap;" v-loading="$store.getters.getLoading">
         <el-col
           :sm="{span:24}"
           :md="{span:12}"
