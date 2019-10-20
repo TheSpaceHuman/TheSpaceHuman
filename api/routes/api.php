@@ -29,23 +29,23 @@ Route::group([
 
 // Password
 Route::post('password/store', 'PasswordController@store');
-Route::get('password', 'PasswordController@index');
+Route::get('passwords', 'PasswordController@index');
 Route::put('password/update/{id}', 'PasswordController@update');
 Route::delete('password/delete/{id}', 'PasswordController@destroy');
 
 // Posts
 Route::post('post/store', 'PostController@store');
-Route::get('post', 'PostController@index');
+Route::get('posts', 'PostController@index');
 Route::put('post/update/{id}', 'PostController@update');
 Route::delete('post/delete/{id}', 'PostController@destroy');
 
 // Tasks
 Route::post('task/store', 'TaskController@store');
-Route::get('task', 'TaskController@index');
+Route::get('tasks', 'TaskController@index');
 Route::put('task/update/{id}', 'TaskController@update');
 Route::delete('task/delete/{id}', 'TaskController@destroy');
 
 // Log
-Route::get('log/passwords', 'LogController@passwords');
-Route::get('log/posts', 'LogController@posts');
-Route::get('log/tasks', 'LogController@tasks');
+Route::get('logs/passwords', 'LogController@passwords');
+Route::get('logs/posts', 'LogController@posts');
+Route::get('logs/tasks', 'LogController@tasks');

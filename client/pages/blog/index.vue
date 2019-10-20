@@ -31,7 +31,17 @@
             :md="24"
             :lg="24"
           >
-            <ThePagination></ThePagination>
+            <nav class="paginate">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                @current-change="changePage"
+                :current-page="$store.getters.getPagination.meta.current_page"
+                :page-size="$store.getters.getPagination.meta.per_page"
+                :total="$store.getters.getPagination.meta.total">
+              </el-pagination>
+            </nav>
+
           </el-col>
         </el-row>
       </section>
@@ -41,19 +51,30 @@
 
 
 <script>
-  import ThePagination from '@/components/Blog/ThePagination.vue'
   export default {
     name: 'Blog',
     middleware: 'auth',
-    components: {
-      ThePagination
-    },
     data() {
       return {
       }
     },
+    methods: {
+      changePage: (page) => {
+        this.$store.dispatch('loadingPosts', {
+          method: 'get',
+          url: 'post',
+          params: {
+            page: page
+          }
+        });
+        console.log('page: ', page)
+      },
+    },
     created() {
-      this.$store.dispatch('loadingPosts');
+      this.$store.dispatch('loadingPosts', {
+        method: 'get',
+        url: 'posts'
+      });
     }
   }
 </script>
@@ -98,5 +119,11 @@
       }
     }
   }
+}
+.paginate {
+  padding: 30px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>

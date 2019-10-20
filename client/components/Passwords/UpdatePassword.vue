@@ -69,7 +69,9 @@
           console.log(e)
           this.dialogVisible = false
         }
-        this.$store.dispatch('loadingPasswords');
+        this.$store.dispatch('loadingPasswords', {
+          method: 'get', url: 'passwords'
+        });
         this.$store.commit('clearJsonFields');
        },
       showForm() {

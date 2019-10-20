@@ -87,7 +87,10 @@
       },
     },
     created() {
-      this.$store.dispatch('loadingPasswords');
+      this.$store.dispatch('loadingPasswords', {
+        method: 'get',
+        url: 'passwords'
+      });
     }
   }
 </script>

@@ -6,5 +6,9 @@ export default () => ({
   loading: true,
   passwordsChangeLog : [],
   postsChangeLog : [],
-  tasksChangeLog : []
+  tasksChangeLog : [],
+  pagination: {
+    links: '',
+    meta: ''
+  }
 })

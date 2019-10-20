@@ -16,6 +16,11 @@ export default {
     state.passwordsChangeLog = payload
   },
 
+  // Pagination
+  setPagination(state, payload) {
+    state.pagination = payload
+  },
+
 
   // JsonFields
   addJsonFields(state, obj) {

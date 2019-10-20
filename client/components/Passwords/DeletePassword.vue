@@ -58,7 +58,10 @@
           })
           console.log(e)
         }
-        this.$store.dispatch('loadingPasswords');
+        this.$store.dispatch('loadingPasswords',{
+          method: 'get',
+          url: 'passwords'
+        });
        },
       alert() {
 

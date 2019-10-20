@@ -35,7 +35,10 @@ export default {
   middleware: 'auth',
   components: {},
   created() {
-    this.$store.dispatch('loadingPasswordsChangeLog');
+    this.$store.dispatch('loadingPasswordsChangeLog', {
+      method: 'get',
+      url: 'logs/passwords'
+    });
   }
 }
 </script>
