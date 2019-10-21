@@ -18,9 +18,23 @@
               <div class="blog__card__date">{{ post.updated_at }}</div>
               <h4 class="blog__card__title">{{ post.title }}</h4>
               <p class="blog__card__subtitle">{{ post.body | truncate(110) }}</p>
-              <div class="blog__card__tags">{{ post.tags }}</div>
               <div class="blog__card__actions">
-                <el-button type="primary">Подробно</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                  @click="deletePost(post.id)"
+                ></el-button>
+                <nuxt-link :to="{name: 'blog-id-edit', params:{ id: post.id }}">
+                  <el-button
+                    type="warning"
+                    icon="el-icon-edit"
+                    circle
+                  ></el-button>
+                </nuxt-link>
+                <nuxt-link :to="{name: 'blog-id-show', params:{ id: post.id }}">
+                  <el-button type="primary">Подробно</el-button>
+                </nuxt-link>
               </div>
             </el-card>
           </el-col>
@@ -33,6 +47,7 @@
           >
             <nav class="paginate">
               <el-pagination
+                v-if="!$store.getters.getLoading"
                 background
                 layout="prev, pager, next"
                 @current-change="changePage"
@@ -55,14 +70,35 @@
     name: 'Blog',
     middleware: 'auth',
     data() {
-      return {
-      }
+      return {}
     },
     methods: {
-      changePage: (page) => {
+      async deletePost(id) {
+        try {
+          this.$store.commit('setLoading', true)
+          const res = await this.$axios({
+            method: 'delete',
+            url: `post/${id}/delete`
+          })
+          this.$store.dispatch('loadingPosts', {
+            method: 'get',
+            url: 'posts'
+          });
+          this.$store.commit('setLoading', false)
+
+          this.$message({
+            showClose: true,
+            message: res.data.message.body,
+            type: res.data.message.type
+          })
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      changePage(page) {
         this.$store.dispatch('loadingPosts', {
           method: 'get',
-          url: 'post',
+          url: 'posts',
           params: {
             page: page
           }
@@ -108,6 +144,14 @@
       font-weight: 400;
       font-size: 17px;
       text-align: right;
+    }
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    &__actions > button,  &__actions > a {
+      margin: 0 7px;
     }
     &__img {
 

@@ -73,7 +73,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::where('id', $id)->where('user_id', auth()->user()->id)->get();
+
+        return PostResource::collection($post);
     }
 
     /**
@@ -104,11 +106,11 @@ class PostController extends Controller
             'tags' => $request->input('tags'),
         ]);
 
-        $updatedPost->log()->create([
-            'message' => 'Изменен пост: ' . $post->title,
-            'type' => 'update',
-            'user_id' => auth()->user()->id
-        ]);
+//        $updatedPost->log()->create([
+//            'message' => 'Изменен пост: ' . $post->title,
+//            'type' => 'update',
+//            'user_id' => auth()->user()->id
+//        ]);
 
         return response()->json([
             'post' => $updatedPost,
@@ -139,11 +141,11 @@ class PostController extends Controller
       if($post->user_id === auth()->user()->id) {
         $post->delete();
 
-        $post->log()->create([
-            'message' => 'Удалён пост: ' . $post->title,
-            'type' => 'delete',
-            'user_id' => auth()->user()->id
-        ]);
+//        $post->log()->create([
+//            'message' => 'Удалён пост: ' . $post->title,
+//            'type' => 'delete',
+//            'user_id' => auth()->user()->id
+//        ]);
 
         return response()->json([
             'message' => [

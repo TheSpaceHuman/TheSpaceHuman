@@ -13,11 +13,11 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker\Factory::create();
-      foreach(range(1, 30) as $key)
+      foreach(range(1, 800) as $key)
       {
         \App\Post::create([
-            'title' => $faker->word,
-            'body' => $faker->text(400),
+            'title' => $faker->sentence(),
+            'body' => $faker->paragraph(20),
             'user_id' => 1,
             'tags' => 'test',
             'image' => $faker->imageUrl(800, 600, 'technics')

@@ -34,10 +34,10 @@ Route::put('password/update/{id}', 'PasswordController@update');
 Route::delete('password/delete/{id}', 'PasswordController@destroy');
 
 // Posts
-Route::post('post/store', 'PostController@store');
 Route::get('posts', 'PostController@index');
-Route::put('post/update/{id}', 'PostController@update');
-Route::delete('post/delete/{id}', 'PostController@destroy');
+Route::get('post/{id}/show', 'PostController@show');
+Route::put('post/{id}/update', 'PostController@update');
+Route::delete('post/{id}/delete', 'PostController@destroy');
 
 // Tasks
 Route::post('task/store', 'TaskController@store');
