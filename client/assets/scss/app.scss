@@ -1,3 +1,4 @@
+@import "utils/vars";
 @import "utils/helper";
 @import "utils/fonts";
 
@@ -60,4 +61,18 @@ a:hover {
 }
 .login-form .form-control, .register-form .form-control {
   width: auto;
+}
+
+//Validations
+.is-invalid input, .is-invalid textarea {
+  border-color: $--color-danger!important;
+}
+.is-valid input, .is-valid textarea {
+  border-color: $--color-success!important;
+}
+.invalid-feedback {
+  color: $--color-danger;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 0;
 }

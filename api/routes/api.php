@@ -35,7 +35,9 @@ Route::delete('password/delete/{id}', 'PasswordController@destroy');
 
 // Posts
 Route::get('posts', 'PostController@index');
+Route::post('post/store', 'PostController@store');
 Route::get('post/{id}/show', 'PostController@show');
+Route::get('post/{id}/edit', 'PostController@edit');
 Route::put('post/{id}/update', 'PostController@update');
 Route::delete('post/{id}/delete', 'PostController@destroy');
 

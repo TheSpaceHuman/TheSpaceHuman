@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('body');
             $table->integer('user_id');
-            $table->string('image', 2048);
+            $table->string('image', 2048)->default('https://images.unsplash.com/photo-1569811350299-71f6be5b2241?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=90');
             $table->string('tags', 4096);
             $table->timestamps();
         });

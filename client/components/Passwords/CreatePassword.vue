@@ -99,12 +99,12 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .create-password {
   &__action {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 20px;
   }
 }

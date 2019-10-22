@@ -15,6 +15,9 @@ export default {
   setPasswordsChangeLog(state, payload) {
     state.passwordsChangeLog = payload
   },
+  setPostsChangeLog(state, payload) {
+    state.postsChangeLog = payload
+  },
 
   // Pagination
   setPagination(state, payload) {

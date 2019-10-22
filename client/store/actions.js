@@ -33,6 +33,17 @@ export default {
       console.log(e)
     })
   },
+  loadingPostsChangeLog(context, axiosOption) {
+    context.commit('setLoading', true)
+    this.$axios(axiosOption)
+    .then((res) => {
+      context.commit('setPostsChangeLog', res.data.data);
+      context.commit('setLoading', false)
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+  },
   loadingTasks(context, axiosOption) {
     context.commit('setLoading', true)
     this.$axios(axiosOption)

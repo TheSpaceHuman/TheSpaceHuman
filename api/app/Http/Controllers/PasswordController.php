@@ -96,10 +96,10 @@ class PasswordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $password = Password::find($id);
+        $password = Password::findOrFail($id);
         if($password->user_id === auth()->user()->id) {
           $fields = json_encode($request->input('fields')) ;
-          $updatedPassword = $password->update([
+          $password->update([
             'title' => $request->input('title'),
             'fields' => $fields
           ]);
@@ -111,7 +111,6 @@ class PasswordController extends Controller
           ]);
 
           return response()->json([
-              'password' => $updatedPassword,
               'message' => [
                   'type' => 'success',
                   'body' => 'Пароль успешно обновлен'
@@ -120,7 +119,7 @@ class PasswordController extends Controller
         } else {
           return response()->json(['message' => [
               'type' => 'warning',
-              'body' => 'Данный пароль не ваш!'
+              'body' => 'Данный пароль вам не принадлежит'
             ]
           ]);
         }
@@ -134,7 +133,7 @@ class PasswordController extends Controller
      */
     public function destroy($id)
     {
-      $password = Password::find($id);
+      $password = Password::findOrFail($id);
 
       if($password->user_id === auth()->user()->id) {
         $password->delete();

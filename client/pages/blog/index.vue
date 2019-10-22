@@ -3,6 +3,11 @@
     <div class="container">
       <h1 class="page__h1">Blog</h1>
       <section class="blog">
+        <div class="blog__add-post">
+          <nuxt-link :to="{name: 'blog-create'}">
+            <el-button type="success" round>Добавить новый пост</el-button>
+          </nuxt-link>
+        </div>
         <el-row type="flex" class="blog__row" v-loading="$store.getters.getLoading">
           <el-col
             :sm="24"
@@ -10,6 +15,7 @@
             :lg="8"
             v-for="(post,i) in $store.getters.getPosts"
             class="blog__col"
+            :key="i"
           >
             <el-card class="blog__card">
               <div class="blog__card__img">
@@ -103,7 +109,6 @@
             page: page
           }
         });
-        console.log('page: ', page)
       },
     },
     created() {
@@ -117,6 +122,14 @@
 
 <style lang="scss">
 .blog {
+
+  &__add-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 
   &__row {
     flex-wrap: wrap;
@@ -134,9 +147,13 @@
       padding: 20px 0;
     }
     &__title {
+      margin-top: 0;
+      margin-bottom: 20px;
       font-size: 20px;
     }
     &__subtitle {
+      margin-top: 0;
+      margin-bottom: 20px;
       font-weight: 300;
     }
     &__tags {

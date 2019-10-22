@@ -40,7 +40,8 @@ class PostController extends Controller
     {
       $request->validate([
           'title' => 'required|string|max:255',
-          'body' => 'required|string'
+          'body' => 'required|string',
+          'tags' => 'required|string|max:255'
       ]);
 
       $post = Post::create([
@@ -51,7 +52,7 @@ class PostController extends Controller
       ]);
 
       $post->log()->create([
-          'message' => 'Добавлен новый пост: ' . $post->title,
+          'message' => 'Создан новый пост: ' . $post->title,
           'type' => 'create',
           'user_id' => auth()->user()->id
       ]);
@@ -86,7 +87,18 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+      $post = Post::where('id', $id)->where('user_id', auth()->user()->id)->get();
+
+      if(empty($post)) {
+        return response()->json([
+            'message' => [
+                'type' => 'error',
+                'body' => 'У вас нет прав на редактирование данного поста'
+            ]
+        ]);
+      }
+
+      return PostResource::collection($post);
     }
 
     /**
@@ -98,22 +110,21 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
+
       if($post->user_id === auth()->user()->id) {
-        $updatedPost = $post->update([
+        $post->update([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'tags' => $request->input('tags'),
         ]);
-
-//        $updatedPost->log()->create([
-//            'message' => 'Изменен пост: ' . $post->title,
-//            'type' => 'update',
-//            'user_id' => auth()->user()->id
-//        ]);
+        $post->log()->create([
+            'message' => 'Изменен пост: ' . $post->title,
+            'type' => 'update',
+            'user_id' => auth()->user()->id
+        ]);
 
         return response()->json([
-            'post' => $updatedPost,
             'message' => [
                 'type' => 'success',
                 'body' => 'Пост успешно обновлен'
@@ -122,7 +133,7 @@ class PostController extends Controller
       } else {
         return response()->json(['message' => [
             'type' => 'warning',
-            'body' => 'Данный пост не ваш!'
+            'body' => 'У вас нет прав на данный пост!'
         ]
         ]);
       }
@@ -136,16 +147,16 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
 
       if($post->user_id === auth()->user()->id) {
         $post->delete();
 
-//        $post->log()->create([
-//            'message' => 'Удалён пост: ' . $post->title,
-//            'type' => 'delete',
-//            'user_id' => auth()->user()->id
-//        ]);
+        $post->log()->create([
+            'message' => 'Удалён пост: ' . $post->title,
+            'type' => 'delete',
+            'user_id' => auth()->user()->id
+        ]);
 
         return response()->json([
             'message' => [

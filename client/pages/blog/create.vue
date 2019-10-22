@@ -1,10 +1,10 @@
 <template>
   <el-main class="main">
-    <div class="container" v-loading="$store.getters.getLoading">
-      <section class="post-edit">
-        <h1>Измение поста {{ post.id }}</h1>
-        <form @submit.prevent="updatePost">
-          <div class="post-edit__form-group">
+    <div class="container">
+      <section class="post-create">
+        <h1>Создание нового поста</h1>
+        <form @submit.prevent="createPost">
+          <div class="post-create__form-group">
             <label for="title">Название</label>
             <el-input
               id="title"
@@ -19,7 +19,7 @@
             <div class="invalid-feedback" v-if="!$v.post.title.required && $v.post.title.$dirty">Поле обязательное</div>
             <div class="invalid-feedback" v-if="!$v.post.title.maxLength && $v.post.title.$dirty">Слишком много символов, максимум: {{ $v.post.title.$params.maxLength.max }} символов</div>
           </div>
-         <div class="post-edit__form-group">
+         <div class="post-create__form-group">
            <label for="body">Контент</label>
            <el-input
              id="body"
@@ -34,7 +34,7 @@
            ></el-input>
            <div class="invalid-feedback" v-if="!$v.post.body.required && $v.post.body.$dirty">Поле обязательное</div>
          </div>
-         <div class="post-edit__form-group">
+         <div class="post-create__form-group">
            <label for="tags">Теги</label>
            <el-input
              id="tags"
@@ -48,7 +48,7 @@
            <div class="invalid-feedback" v-if="!$v.post.tags.required && $v.post.tags.$dirty">Поле обязательное</div>
            <div class="invalid-feedback" v-if="!$v.post.tags.maxLength && $v.post.tags.$dirty">Слишком много символов, максимум: {{ $v.post.title.$params.maxLength.max }} символов</div>
          </div>
-          <el-button type="warning" native-type="submit" :disabled="$v.$error">Обновить</el-button>
+          <el-button type="primary" native-type="submit" :disabled="$v.$error">Создать</el-button>
         </form>
       </section>
     </div>
@@ -58,11 +58,15 @@
 <script>
   import { required, maxLength } from 'vuelidate/lib/validators'
   export default {
-    name: 'PostEdit',
+    name: 'PostCreate',
     middleware: 'auth',
     data() {
       return {
-        post: ''
+        post: {
+          title: '',
+          body: '',
+          tags: '',
+        }
       }
     },
     validations: {
@@ -81,12 +85,12 @@
       }
     },
     methods: {
-      async updatePost() {
+      async createPost() {
         try {
           this.$store.commit('setLoading', true)
           const res = await this.$axios({
-            method: 'put',
-            url: `post/${this.post.id}/update`,
+            method: 'post',
+            url: `post/store`,
             data: this.post
           })
           this.$message({
@@ -98,30 +102,13 @@
         } catch (e) {
           console.log(e)
         }
-      },
-      async loadingPost() {
-        try {
-          this.$store.commit('setLoading', true)
-          const res = await this.$axios({
-            method: 'get',
-            url: `post/${this.$route.params.id}/edit`
-          })
-          console.log(res)
-          this.post = res.data.data[0]
-          this.$store.commit('setLoading', false)
-        } catch (e) {
-          console.log(e)
-        }
       }
-    },
-    created() {
-      this.loadingPost()
     }
   }
 </script>
 
 <style lang="scss">
-.post-edit {
+.post-create {
   label {
     display: block;
     margin-bottom: 8px;

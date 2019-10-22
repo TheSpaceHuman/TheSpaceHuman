@@ -17,6 +17,9 @@ export default {
   getPasswordsChangeLog: state => {
     return state.passwordsChangeLog
   },
+  getPostsChangeLog: state => {
+    return state.postsChangeLog
+  },
   getPagination: state => {
     return state.pagination
   }
