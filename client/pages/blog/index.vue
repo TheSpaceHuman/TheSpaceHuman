@@ -73,7 +73,7 @@
 
 <script>
   export default {
-    name: 'Blog',
+    name: 'Posts',
     middleware: 'auth',
     data() {
       return {}
