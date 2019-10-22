@@ -48,7 +48,7 @@
            <div class="invalid-feedback" v-if="!$v.post.tags.required && $v.post.tags.$dirty">Поле обязательное</div>
            <div class="invalid-feedback" v-if="!$v.post.tags.maxLength && $v.post.tags.$dirty">Слишком много символов, максимум: {{ $v.post.title.$params.maxLength.max }} символов</div>
          </div>
-          <el-button type="primary" native-type="submit" :disabled="$v.$error">Создать</el-button>
+          <el-button type="primary" native-type="submit" :disabled="$v.$invalid">Создать</el-button>
         </form>
       </section>
     </div>
