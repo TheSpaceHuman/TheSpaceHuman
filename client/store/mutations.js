@@ -36,8 +36,8 @@ export default {
     state.jsonFields = [{label: '', value: ''}];
   },
   updateJsonField(state, { index, value }) {
-    let oldField = state.jsonFields[index];
-    let newField = { label: value.label || oldField.label, value: value.value || oldField.value }
+    const oldField = state.jsonFields[index];
+    const newField = { label: value.label || oldField.label, value: value.value || oldField.value }
     Vue.set(state.jsonFields, index, newField)
   },
   setJsonFields(state, payload) {
